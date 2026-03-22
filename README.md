@@ -21,12 +21,13 @@ The system dynamically controls traffic signals to reduce congestion and improve
 
 ```
 RL-Traffic-Signal/
- ┣ dqn_train.py.py
- ┣ dqn_training_metrics.json
- ┣ qlearning_agent.py
- ┣ train.py
- ┣ training_metrics.json
- ┣ dqn_agent.py
+ ┣ ┣ Training/
+ ┣ ┣ dqn_train.py.py
+ ┣ ┣ dqn_training_metrics.json
+ ┣ ┣ qlearning_agent.py
+ ┣ ┣ train.py
+ ┣ ┣ training_metrics.json
+ ┣ ┣ dqn_agent.py
  ┣ sumo_env.py          # RL-ready SUMO environment (Person 1)
  ┣ sumo_control.py      # Manual traffic signal control using TraCI
  ┣ test_sumo_env.py     # Test script for environment
