@@ -21,6 +21,12 @@ The system dynamically controls traffic signals to reduce congestion and improve
 
 ```
 RL-Traffic-Signal/
+ ┣ dqn_train.py.py
+ ┣ dqn_training_metrics.json
+ ┣ qlearning_agent.py
+ ┣ train.py
+ ┣ training_metrics.json
+ ┣ dqn_agent.py
  ┣ sumo_env.py          # RL-ready SUMO environment (Person 1)
  ┣ sumo_control.py      # Manual traffic signal control using TraCI
  ┣ test_sumo_env.py     # Test script for environment
@@ -95,13 +101,29 @@ This will:
 * Created RL-compatible environment (`sumo_env.py`)
 
 ---
+Person 2 Contributions – Reinforcement Learning Agent
 
-## 🔄 Future Work (Person 2 & 3)
+Role: Develop and integrate a Reinforcement Learning (RL) agent to optimize traffic signals using the SUMO environment.
 
-* Integrate Reinforcement Learning (Q-Learning / DQN)
-* Optimize traffic signal policies
-* Add visualization dashboard and performance metrics
-* Compare RL vs fixed-time traffic signals
+Key Contributions
+Agent Development
+Implemented QLearningAgent in agent.py for controlling traffic lights.
+Designed state-action-reward logic for traffic signal optimization.
+Training Pipeline
+Created train.py to train the RL agent within the SUMO simulation environment.
+Integrated environment methods (reset(), step(), get_state()) to interact with the agent.
+Traffic Optimization
+Tuned reward functions to reduce vehicle congestion.
+Verified intelligent signal switching and observed improved traffic flow over episodes.
+Documentation & Testing
+Ensured the RL agent runs correctly with the existing SUMO-based environment (sumo_env.py) without modifying core logic.
+Provided usage instructions for cloning, installing dependencies, and running the RL training.
+Optional Enhancements
+Produced graphs for reward progression and traffic metrics (if applicable).
+
+Impact:
+
+Successfully integrated a Reinforcement Learning agent (Q-learning) into the SUMO environment, enabling intelligent traffic signal control and providing a foundation for further improvements such as DQN or advanced RL algorithms.
 
 ---
 
