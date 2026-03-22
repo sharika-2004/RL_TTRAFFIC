@@ -1,11 +1,11 @@
 <configuration>
     <input>
-        <net-file value="intersection.net.xml"/>
-        <route-files value="routes.rou.xml"/>
+        <net-file value="C:/Users/gouri/RL_TTRAFFIC/sumo_files/intersection.net.xml"/>
+        <route-files value="C:/Users/gouri/RL_TTRAFFIC/sumo_files/routes.rou.xml"/>
     </input>
 
     <time>
         <begin value="0"/>
-        <end value="100"/>
+        <end value="1000"/>
     </time>
 </configuration>

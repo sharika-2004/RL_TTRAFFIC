@@ -1,62 +1,76 @@
 import traci
-import numpy as np
 
 
 class SumoEnvironment:
     def __init__(self, config_path):
         self.config = config_path
         self.tls_id = None
+        self.is_running = False
+        self.prev_total = 0   # for reward calculation
 
     def start(self):
-        # Start SUMO GUI
-        traci.start(["sumo-gui", "-c", self.config])
-
-        # Get traffic light ID
-        self.tls_id = traci.trafficlight.getIDList()[0]
+        if not self.is_running:
+            traci.start(["sumo", "-c", self.config])
+            self.tls_id = traci.trafficlight.getIDList()[0]
+            self.is_running = True
 
     def reset(self):
-        # Reload simulation
-        traci.load(["-c", self.config])
-        return self.get_state()
+        if self.is_running:
+            traci.load(["-c", self.config])   # reload same simulation
+        else:
+            self.start()
+
+        state = self.get_state()
+        self.prev_total = sum(state)   # initialize reward baseline
+        return state
 
     def step(self, action):
-        # 🔥 Get correct signal format dynamically
         current_state = traci.trafficlight.getRedYellowGreenState(self.tls_id)
         length = len(current_state)
-
         half = length // 2
 
-        # Generate safe patterns
+        # generate safe patterns
         pattern1 = "G" * half + "r" * (length - half)
         pattern2 = "r" * half + "G" * (length - half)
 
-        # Apply action
+        # apply action
         if action == 0:
             traci.trafficlight.setRedYellowGreenState(self.tls_id, pattern1)
         else:
             traci.trafficlight.setRedYellowGreenState(self.tls_id, pattern2)
 
-        # Move simulation forward
-        traci.simulationStep()
+        # run simulation for few steps (IMPORTANT)
+        for _ in range(5):
+            traci.simulationStep()
 
-        # Get new state
+        # get new state
         state = self.get_state()
 
-        # Reward = minimize congestion
-        reward = -sum(state)
+        current_total = sum(state)
+
+        # reward is change in total waiting vehicles (positive = improvement)
+        reward = self.prev_total - current_total
+
+        # additional small steady reward for keeping absolute queues low
+        reward -= 0.1 * current_total
+
+        # clip to stabilize learning, prevent explosion
+        reward = max(-10.0, min(10.0, reward))
+
+        self.prev_total = current_total
 
         return state, reward
 
     def get_state(self):
-        # Get vehicle count on all lanes
         lanes = traci.lane.getIDList()
         state = []
-
         for lane in lanes:
-            count = traci.lane.getLastStepVehicleNumber(lane)
-            state.append(count)
+            waiting = traci.lane.getLastStepHaltingNumber(lane)
+            state.append(waiting)
 
-        return state
+        return state  # returns list like [3, 5, 2, 7]
 
     def close(self):
-        traci.close()
+        if self.is_running:
+            traci.close()
+            self.is_running = False
