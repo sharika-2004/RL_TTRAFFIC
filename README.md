@@ -21,18 +21,43 @@ The system dynamically controls traffic signals to reduce congestion and improve
 
 ```
 RL-Traffic-Signal/
- ┣ ┣ Training/
- ┣ ┣ dqn_train.py.py
- ┣ ┣ dqn_training_metrics.json
- ┣ ┣ qlearning_agent.py
- ┣ ┣ train.py
- ┣ ┣ training_metrics.json
- ┣ ┣ dqn_agent.py
- ┣ sumo_env.py          # RL-ready SUMO environment (Person 1)
- ┣ sumo_control.py      # Manual traffic signal control using TraCI
- ┣ test_sumo_env.py     # Test script for environment
- ┣ environment.ipynb    # Initial custom simulation (Phase 1)
- ┣ sumo_files/          # SUMO configuration files
+ ┣ Training/
+ ┃ ┣ dqn_train.py
+ ┃ ┣ dqn_training_metrics.json
+ ┃ ┣ qlearning_agent.py
+ ┃ ┣ train.py
+ ┃ ┣ training_metrics.json
+ ┃ ┣ dqn_agent.py
+ ┃
+ ┣ graphs/
+ ┃ ┣ graph.py
+ ┃ ┣ generate_plots.py             
+ ┃ ┣ dqn.png
+ ┃ ┣ evaluation_qlearn.png
+ ┃ ┣ queue_qlearn.png
+ ┃ ┣ reward_qlearn.png
+ ┃ ┣ summary_dashboard_qlearn.png
+ ┃ ┣ throughput_qlearn.png
+ ┃ ┣ training_curves_qlearn.png
+ ┃ ┣ waiting_qlearn.png
+ ┃
+ ┣ gui/                     
+ ┃ ┣ dqn_ui.py                
+ ┃ ┣ q_learn_ui.py
+ ┃
+ ┣ assets/                  
+ ┃ ┣ dqn_dash1.png
+ ┃ ┣ dqn_dash2.png
+ ┃ ┣ dqn_dash3.png
+ ┃ ┣ qlearn_dash1.png
+ ┃ ┣ qlearn_dash2.png
+ ┃ ┣ qlearn_dash3.png
+ ┃
+ ┣ sumo_env.py
+ ┣ sumo_control.py
+ ┣ test_sumo_env.py
+ ┣ environment.ipynb
+ ┣ sumo_files/
  ┃ ┣ config.sumocfg
  ┃ ┣ nodes.nod.xml
  ┃ ┣ edges.edg.xml
