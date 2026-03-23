@@ -156,21 +156,17 @@ Key Contributions
 
 Data Handling
 Processed training outputs from Q-Learning and DQN (training_metrics.json, dqn_training_metrics.json) for analysis.
-
 Visualization
 Created graphs for reward progression and evaluation metrics.
 Compared Q-Learning and DQN performance using clear plots.
-
 Dashboard Development
 Built a UI to display training results, graphs, and evaluation summaries.
 Integrated multiple views such as training curves and model comparison.
-
 Analysis
 Observed learning trends and convergence behavior.
 Highlighted performance differences between Q-Learning and DQN.
 
 Impact:
-
 Developed a visualization and dashboard system that converts training results into clear insights, enabling effective analysis and presentation of RL model performance.
 
 ---
@@ -217,26 +213,23 @@ Handled continuous state representation more effectively
 Demonstrated strong generalization across episodes
 
 📊 Key Observations
-
 Reduction in congestion-related penalties over time
 Stable policy convergence in DQN compared to Q-learning
 Improved traffic throughput and reduced queue lengths in later episodes
 Exploration–exploitation balance played a critical role in performance
 
 📈 Visualization & Analysis
-
 Training and evaluation metrics were tracked across episodes
 Reward curves, evaluation trends, and performance dashboards were developed
-A user interface was built to visualize model performance and compare algorithms
+A user interface was built to visualize model performance and compare algorithms (gui, assets)
+These can be viwed at graphs.
 
 ⚠️ Limitations
-
 Simplified traffic intersection (single junction)
 Limited action space (basic signal switching)
 Reward function primarily based on vehicle count (can be extended)
 
 🚀 Future Improvements
-
 Multi-intersection traffic control (multi-agent RL)
 Advanced reward shaping (waiting time, fairness, emissions)
 Integration of real-world traffic datasets
